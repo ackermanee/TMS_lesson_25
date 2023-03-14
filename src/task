@@ -1,0 +1,32 @@
+CREATE TABLE book (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(100) NOT NULL,
+  author_id INT NOT NULL,
+  pages INT NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES author(id)
+);
+
+INSERT INTO author (name, surname) VALUES
+  ('Никита', 'Горячев'),
+  ('Антон', 'Шастун'),
+  ('Элек', 'Смит');
+
+INSERT INTO book (title, author_id, pages) VALUES
+  ('Книга про Джаву', 1, 200),
+  ('Книга про Питон', 2, 400),
+  ('Книга про Шарпы', 3, 500);
+
+SELECT author.name, author.surname, book.title
+FROM author
+JOIN book ON author.id = book.author_id;
+
+/*Вывод всех книг, где количество страниц больше 300*/
+SELECT * FROM book
+WHERE pages > 300;
+
+/*Вывод авторов, у которых есть хотя бы 1 книга, где количество страниц больше 300*/
+SELECT author.name, author.surname
+FROM author
+JOIN book ON author.id = book.author_id
+WHERE book.pages > 300
+GROUP BY author.id;
