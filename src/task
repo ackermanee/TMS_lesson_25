@@ -25,8 +25,7 @@ SELECT * FROM book
 WHERE pages > 300;
 
 /*Вывод авторов, у которых есть хотя бы 1 книга, где количество страниц больше 300*/
-SELECT author.name, author.surname
+SELECT DISTINCT author.name, author.surname
 FROM author
 JOIN book ON author.id = book.author_id
-WHERE book.pages > 300
-GROUP BY author.id;
+WHERE book.pages > 300;
